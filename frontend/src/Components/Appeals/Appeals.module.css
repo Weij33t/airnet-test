@@ -1,0 +1,20 @@
+.Appeals {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  gap: 20px;
+}
+
+.CreateAppButton {
+  width: min-content;
+  height: min-content;
+  justify-self: center;
+  align-self: center;
+
+  background: none;
+  border: none;
+  font-size: 45px;
+
+  cursor: pointer;
+}

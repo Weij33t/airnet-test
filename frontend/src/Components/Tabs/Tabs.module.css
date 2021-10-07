@@ -1,0 +1,33 @@
+.Tabs {
+  padding: 20px;
+}
+
+.Tab {
+  padding: 7px 10px;
+
+  background: none;
+  border: none;
+  border-radius: 6px;
+
+  color: #000;
+  cursor: pointer;
+}
+
+.Tab.active:nth-child(1) {
+  background: yellow;
+}
+
+.Tab.active:nth-child(2) {
+  background: orange;
+  color: #fff;
+}
+
+.Tab.active:nth-child(3) {
+  background: green;
+  color: #fff;
+}
+
+.Tab.active:nth-child(4) {
+  background: brown;
+  color: #fff;
+}
