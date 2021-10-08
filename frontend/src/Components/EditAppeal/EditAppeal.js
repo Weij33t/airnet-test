@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import styles from './EditAppeal.module.css'
 import { Input } from '../Shared/Input/Input'
 import { Button } from '../Shared/Button/Button'
-import { Select } from '../Shared/Select'
+import { Select } from '../Shared/Select/Select'
+import { formatDate } from './../../utils/utils'
 
 const statusesSelect = ['Готово', 'Входящая', 'Назначенная', 'Архив']
 export const EditAppeal = ({ setIsEditMode, appeal, updateAppeal }) => {
@@ -35,16 +36,18 @@ export const EditAppeal = ({ setIsEditMode, appeal, updateAppeal }) => {
           onChange={(e) => changeFields('comment', e.target.value)}
         />{' '}
       </div>
-      <div>
-        <span>Дата назначения </span>{' '}
-        <Input
-          type={'date'}
-          defaultValue={appeal?.appointed_date}
-          onChange={(e) => changeFields('appointed_date', e.target.value)}
-        />{' '}
-      </div>
+      {(appeal.app_status === 'Входящая' ||
+        appeal.app_status === 'Назначенная') && (
+        <div>
+          <span>Дата назначения </span>{' '}
+          <Input
+            type={'date'}
+            defaultValue={formatDate()}
+            onChange={(e) => changeFields('appointed_date', e.target.value)}
+          />{' '}
+        </div>
+      )}
       <Button
-        className={styles.EditAppButton}
         value={'Изменить'}
         onClick={() => {
           updateAppeal(fieldsToEdit, appeal.id)

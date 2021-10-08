@@ -6,16 +6,19 @@ import styles from './Appeals.module.css'
 import { Button } from './../Shared/Button/Button'
 import { Tabs } from './../Tabs/Tabs'
 import { CreateAppeal } from './../CreateAppeal/CreateAppeal'
+import { formatDate } from './../../utils/utils'
 
-export const Appeals = () => {
+export const Appeals = ({ userId }) => {
   const [appeals, setAppeals] = useState([])
   const [error, setError] = useState(null)
   const [selectedStatus, setSelectedStatus] = useState('Входящая')
   const [newAppeal, setNewAppeal] = useState({
-    created_date: '',
-    appeal_type: 'Входящая',
+    created_date: formatDate(new Date()),
+    app_status: 'Входящая',
+    appeal_type: 'Звонок',
     appeal_text: '',
-    user_id: 1,
+    user_id: userId,
+    appointed_date: formatDate(new Date()),
   })
   const [isCreateMode, setIsCreateMode] = useState(false)
 
@@ -26,7 +29,7 @@ export const Appeals = () => {
   }, [])
 
   const fetchAppeals = async () => {
-    const response = await appealsApi.getAppeals(1)
+    const response = await appealsApi.getAppeals(userId)
     if (!response) setError(response.statusText)
     const data = await response.json()
     setAppeals(data)
@@ -34,20 +37,31 @@ export const Appeals = () => {
   const setStatus = (e) => setSelectedStatus(e.target.dataset.value)
 
   const changeNewAppeal = (field, value) => {
-    console.log(field, value)
-    setNewAppeal({ ...newAppeal, [field]: value })
+    setNewAppeal({
+      ...newAppeal,
+      [field]: value,
+      app_status: selectedStatus,
+    })
   }
 
   const createAppeal = async () => {
     await appealsApi.createAppeal(newAppeal)
+    setIsCreateMode(false)
     fetchAppeals()
+    setNewAppeal({
+      created_date: formatDate(new Date()),
+      app_status: 'Входящая',
+      appeal_type: 'Звонок',
+      appeal_text: '',
+      user_id: userId,
+      appointed_date: formatDate(new Date()),
+    })
   }
 
   const updateAppeal = async (fieldsToEdit, id) => {
     await appealsApi.editAppeal(fieldsToEdit, id)
     fetchAppeals()
   }
-  console.log(newAppeal)
 
   if (error) {
     return <h1>{error}</h1>
@@ -59,7 +73,13 @@ export const Appeals = () => {
       <div className={styles.Appeals}>
         {appeals.map((appeal) => {
           if (appeal.app_status === selectedStatus)
-            return <Appeal updateAppeal={updateAppeal} appeal={appeal} />
+            return (
+              <Appeal
+                key={appeal.id}
+                updateAppeal={updateAppeal}
+                appeal={appeal}
+              />
+            )
           else return null
         })}
       </div>
@@ -74,7 +94,13 @@ export const Appeals = () => {
       )}
       <Button
         value={'+'}
-        onClick={() => setIsCreateMode(true)}
+        onClick={() => {
+          setIsCreateMode(true)
+          setNewAppeal({
+            ...newAppeal,
+            app_status: selectedStatus,
+          })
+        }}
         className={styles.CreateAppButton}
       />
     </div>

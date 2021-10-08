@@ -1,5 +1,6 @@
 .Tabs {
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 .Tab {
@@ -10,6 +11,8 @@
   border-radius: 6px;
 
   color: #000;
+  font-size: 16px;
+
   cursor: pointer;
 }
 

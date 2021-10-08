@@ -13,7 +13,7 @@ const controller = {
         res.status(404).send('Пользователь не найден')
       }
 
-      res.send({ data: candidate[0] })
+      res.send(candidate[0])
     } catch (error) {
       console.log(error)
     }

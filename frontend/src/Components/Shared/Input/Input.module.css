@@ -1,0 +1,18 @@
+.Input {
+  margin: 5px;
+  padding: 7px 7px 7px 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  box-shadow: 0px -10px 21px rgb(133 146 170 / 6%),
+    0px -2px 7px rgb(133 146 170 / 6%), 0px -1px 2px rgb(133 146 170 / 6%),
+    0px 10px 21px rgb(133 146 170 / 6%), 0px 2px 7px rgb(133 146 170 / 6%),
+    0px 0px 2px rgb(133 146 170 / 6%);
+
+  font-size: 16px;
+}
+
+.Input:focus {
+  border-color: green;
+}

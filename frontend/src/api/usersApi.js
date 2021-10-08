@@ -9,7 +9,7 @@ export const usersApi = {
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
       })
-      if (response.statusText !== 'ok') throw response
+      if (response.statusText !== 'OK') throw response
       return response
     } catch (e) {
       console.log(e)

@@ -1,6 +1,6 @@
 const URLS = {
-  APPS_URL: 'http://localhost:8080/api/apps',
-  USERS_URL: 'http://localhost:8080/api/users',
+  APPS_URL: 'https://airnet-test.herokuapp.com/api/apps',
+  USERS_URL: 'https://airnet-test.herokuapp.com/api/users',
 }
 
 export { URLS }

@@ -9,13 +9,14 @@ export const Login = ({ setUserId }) => {
   const [isError, setError] = useState('')
 
   const auth = async () => {
-    const id = await usersApi.auth(email, password)
-    console.log(id)
-    if (!id.ok) {
-      setError(id.statusText)
+    const response = await usersApi.auth(email, password)
+    if (!response.ok) {
+      setError(response.statusText)
       return
     }
-    setUserId(id)
+    const data = await response.json()
+    console.log(data.id)
+    setUserId(data.id)
   }
 
   if (isError) {

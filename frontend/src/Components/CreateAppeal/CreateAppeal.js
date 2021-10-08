@@ -2,7 +2,8 @@ import React from 'react'
 import styles from './CreateAppeal.module.css'
 import { Input } from './../Shared/Input/Input'
 import { Button } from './../Shared/Button/Button'
-import { Select } from './../Shared/Select'
+import { Select } from '../Shared/Select/Select'
+import { formatDate } from './../../utils/utils'
 
 const typesSelect = [' Звонок', 'Сайт', 'Email']
 export const CreateAppeal = ({
@@ -11,7 +12,6 @@ export const CreateAppeal = ({
   changeNewAppeal,
   createAppeal,
 }) => {
-  console.log(setIsCreateMode)
   return (
     <div className={styles.CreateAppealForm}>
       <span
@@ -23,6 +23,7 @@ export const CreateAppeal = ({
       <div>
         <span>Дата создания</span>{' '}
         <Input
+          defaultValue={formatDate(new Date())}
           onChange={(e) => changeNewAppeal('created_date', e.target.value)}
           type={'date'}
         />{' '}
@@ -41,11 +42,7 @@ export const CreateAppeal = ({
           onChange={(e) => changeNewAppeal('appeal_text', e.target.value)}
         />{' '}
       </div>
-      <Button
-        className={styles.CreateAppButton}
-        value={'Создать'}
-        onClick={createAppeal}
-      />
+      <Button value={'Создать'} onClick={createAppeal} />
     </div>
   )
 }

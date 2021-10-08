@@ -26,14 +26,14 @@ export const appealsApi = {
       console.log(e)
     }
   },
-  async editAppeal(data, id) {
+  async editAppeal(data, app_id) {
     try {
       const fetchUrl = new URL(URLS.APPS_URL + '/edit')
       const fields = Object.keys(data)
       const values = Object.values(data)
       const response = await fetch(fetchUrl.toString(), {
         method: 'PUT',
-        body: JSON.stringify({ fields, values, app_id: id }),
+        body: JSON.stringify({ fields, values, app_id }),
         headers: { 'Content-Type': 'application/json' },
       })
       return response

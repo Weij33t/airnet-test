@@ -32,7 +32,6 @@ const controller = {
   async getApps(req, res) {
     try {
       const { user_id } = req.query
-
       const result = await db.any(
         'SELECT * FROM applications WHERE user_id=$1 ORDER BY id',
         [user_id]
@@ -44,13 +43,13 @@ const controller = {
   },
   async create(req, res) {
     try {
-      const { created_date, appeal_type, appeal_text, user_id } = req.body
+      const { created_date, appeal_type, appeal_text, app_status, user_id } =
+        req.body
 
       const result = await db.any(
-        'INSERT INTO applications ("created_date", "appeal_type", "appeal_text", "user_id") VALUES ($1, $2, $3, $4)',
-        [created_date, appeal_type, appeal_text, user_id]
+        'INSERT INTO applications ("created_date", "appeal_type", "appeal_text", "app_status", "user_id") VALUES ($1, $2, $3, $4, $5)',
+        [created_date, appeal_type, appeal_text, app_status, user_id]
       )
-      console.log(result)
       res.send(result)
     } catch (error) {
       console.log(error)
@@ -65,7 +64,6 @@ const controller = {
         values,
         app_id
       )
-      console.log(fields, values, app_id)
       await db.any(updateString, [])
       res.send('ok')
     } catch (error) {

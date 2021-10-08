@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       {!userId && <Login setUserId={setUserId} />}
-      {userId && <Appeals />}
+      {userId && <Appeals userId={userId} />}
     </div>
   )
 }
